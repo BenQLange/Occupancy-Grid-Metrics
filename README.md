@@ -1,5 +1,5 @@
 # Occupancy Grid Metrics
-Metrics to evaluate the quality of the Occupancy Grid Prediction Algorithms
+Metrics to evaluate the quality of the Occupancy Grid Prediction Algorithms. Code is compatible with Python 3.7.
 
 Metrics used:
 - Image Similarity (IS)
