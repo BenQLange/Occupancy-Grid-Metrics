@@ -12,9 +12,8 @@ def MSE(X_test, X_hat, start_time = 0):
 
 def SSIM(X_test, X_hat, start_time = 0):
 
-    ssim_values = []
-
     num_images, num_timesteps, _, _ = X_test.shape
+    ssim_values = []
 
     for idx in range(num_images):
         for t in range(start_time, num_timesteps):
@@ -29,8 +28,7 @@ def SSIM(X_test, X_hat, start_time = 0):
 
     return ssim_model, ssim_values
 
-def MapSimilarityMetric(X_test, X_hat, start_time = 0):
-
+def ImageSimilarityMetric(X_test, X_hat, start_time = 0):
 
     num_samples, num_times,_,_ = X_hat.shape
     score, score_occupied, score_occluded, score_free = 0, 0, 0, 0
