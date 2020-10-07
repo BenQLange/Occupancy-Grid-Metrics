@@ -144,8 +144,8 @@ def computeDistance(m1,m2):
     if num_cells != 0:
         output = d/num_cells
 
-    if num_cells == 0 or d == np.Inf:        
-        output = y_size
+    if num_cells == 0 or d == np.Inf:
+        output = y_size + x_size
 
     return output
 
