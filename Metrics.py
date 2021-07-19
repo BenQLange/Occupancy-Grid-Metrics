@@ -67,16 +67,9 @@ def toDiscrete(m):
     occupied_value = 0.85
     occluded_value = 0.20
 
-    for x in range(x_size):
-        for y in range(y_size):
-            val = m[y,x]
-
-            if val >= occupied_value:
-                m_occupied[y,x] = 1
-            elif val >= occluded_value:
-                m_occluded[y,x] = 1
-            else:
-                m_free[y,x] = 1
+    m_occupied[m >= occupied_value] = 1.0
+    m_occluded[np.logical_and(m >= occluded_value, m < occupied_value)] = 1.0
+    m_free[m < occluded_value] = 1.0
 
     return m_occupied, m_occluded, m_free
 
@@ -90,11 +83,7 @@ def todMap(m):
     y_size, x_size = m.shape
     dMap = np.ones(m.shape) * np.Inf
 
-    for y in range(y_size):
-        for x in range(x_size):
-            if m[y,x] == 1:
-                dMap[y,x] = 0
-
+    dMap[m == 1] = 0.0
 
     for y in range(0,y_size):
         if y == 0:
@@ -133,13 +122,10 @@ def computeDistance(m1,m2):
 
     y_size, x_size = m1.shape
     dMap = todMap(m2)
-    d = 0
-    num_cells = 0
-    for y in range(0,y_size):
-        for x in range(0,x_size):
-            if m1[y,x] == 1:
-                num_cells += 1
-                d += dMap[y,x]
+    # d = 0
+    # num_cells = 0
+    d = np.sum(dMap[m1 == 1])
+    num_cells = np.sum(m1 == 1)
 
     if num_cells != 0:
         output = d/num_cells
